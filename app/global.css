@@ -1,0 +1,852 @@
+/* Self-hosted via @fontsource-variable/inter — no render-blocking Google Fonts request */
+@import "@fontsource-variable/inter";
+
+@import "tailwindcss";
+@import "@agent-native/core/styles/agent-native.css";
+@import "@agent-native/toolkit/styles.css";
+@import "@agent-native/agentkit/react/styles.css";
+
+@source "./**/*.{ts,tsx}";
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 10%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 10%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 10%;
+  --primary: 0 0% 15%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 95%;
+  --secondary-foreground: 0 0% 15%;
+  --muted: 0 0% 95%;
+  --muted-foreground: 0 0% 45%;
+  --accent: 0 0% 95%;
+  --accent-foreground: 0 0% 15%;
+  --destructive: 0 91% 71%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 90%;
+  --input: 0 0% 90%;
+  --ring: 0 0% 40%;
+  --radius: 0.5rem;
+  --sidebar-background: 0 0% 98%;
+  --sidebar-foreground: 0 0% 45%;
+  --sidebar-primary: 0 0% 15%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 0 0% 95%;
+  --sidebar-accent-foreground: 0 0% 15%;
+  --sidebar-border: 0 0% 90%;
+  --sidebar-ring: 0 0% 40%;
+  --chat-sidebar-width: 17.25rem;
+  --chat-sidebar-content-inset: 0.5rem;
+  --chat-sidebar-row-padding: 0.75rem;
+  --chat-sidebar-title-fade: 1.25rem;
+}
+
+.chat-layout-shell {
+  --agent-layout-left-drawer-expanded-width: var(--chat-sidebar-width);
+  --agent-native-lower-surface: var(--agent-kit-nav-surface);
+}
+
+.agentkit-chat-empty-copy {
+  text-align: center;
+}
+
+.agentkit-chat-empty-copy h1 {
+  margin: 0;
+  color: hsl(var(--foreground));
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.agentkit-chat-empty-copy p {
+  margin: 0.5rem 0 0;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.agent-kit-chat-footer-stack {
+  inline-size: min(100%, 47rem);
+  margin-inline: auto;
+  pointer-events: auto;
+}
+
+.agent-kit-chat-footer-stack > .agentkit-composer-stack {
+  inline-size: 100%;
+}
+
+.agent-kit-chat-guided-question {
+  max-block-size: min(32rem, 58dvh);
+  overflow: auto;
+  margin-block-end: 0.5rem;
+  border: 1px solid var(--agentkit-border);
+  border-radius: var(--agentkit-radius);
+  background: var(--agentkit-surface);
+  box-shadow: var(--agentkit-elevation);
+}
+
+.chat-sidebar-history .an-chat-history__list {
+  padding-top: 0;
+}
+
+.chat-sidebar-history .an-chat-history__section-label {
+  padding: 8px
+    calc(var(--chat-sidebar-content-inset) + var(--chat-sidebar-row-padding))
+    5px;
+  color: hsl(var(--sidebar-foreground) / 0.66);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.chat-sidebar-history.an-chat-history--rail .an-chat-history-row {
+  margin-inline: var(--chat-sidebar-content-inset);
+  border-radius: calc(var(--radius) + 2px);
+}
+
+.chat-sidebar-history.an-chat-history--rail .an-chat-history-row__button {
+  min-height: 34px;
+  padding-block: 7px;
+  padding-inline: var(--chat-sidebar-row-padding);
+  color: hsl(var(--sidebar-foreground));
+}
+
+.chat-sidebar-history.an-chat-history--rail
+  .an-chat-history-row--has-menu
+  .an-chat-history-row__button {
+  padding-inline-end: calc(var(--chat-sidebar-row-padding) + 1.5rem);
+}
+
+.chat-sidebar-history .an-chat-history-row__title {
+  flex: 1 1 auto;
+  color: hsl(var(--sidebar-accent-foreground));
+  font-size: 13px;
+  font-weight: 400;
+  text-overflow: clip;
+}
+
+.chat-sidebar-thread-title-shell {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 6px;
+}
+
+.chat-sidebar-thread-title {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.chat-sidebar-thread-running {
+  color: hsl(var(--sidebar-foreground) / 0.72);
+}
+
+.chat-sidebar-thread-title[data-overflow="true"] {
+  mask-image: linear-gradient(
+    to right,
+    hsl(var(--foreground)) 0,
+    hsl(var(--foreground)) calc(100% - var(--chat-sidebar-title-fade)),
+    hsl(var(--foreground) / 0) 100%
+  );
+}
+
+.chat-sidebar-thread-title__content {
+  display: block;
+  width: max-content;
+  transform: translateX(0);
+}
+
+.an-chat-history-row:hover
+  .chat-sidebar-thread-title[data-overflow="true"]
+  .chat-sidebar-thread-title__content {
+  animation: chat-sidebar-title-reveal
+    var(--chat-sidebar-title-duration, 1800ms) ease-in-out 350ms;
+}
+
+.chat-sidebar-thread-details {
+  border-color: hsl(var(--sidebar-border));
+}
+
+.chat-sidebar-history.an-chat-history--rail
+  .an-chat-history-row__menu-trigger--pinned {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.chat-sidebar-history.an-chat-history--rail
+  .an-chat-history-row:hover
+  .an-chat-history-row__menu-trigger--pinned,
+.chat-sidebar-history.an-chat-history--rail
+  .an-chat-history-row:focus-within
+  .an-chat-history-row__menu-trigger--pinned,
+.chat-sidebar-history.an-chat-history--rail
+  .an-chat-history-row__menu-trigger--pinned[aria-expanded="true"] {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+@keyframes chat-sidebar-title-reveal {
+  to {
+    transform: translateX(calc(-1 * var(--chat-sidebar-title-shift, 0px)));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .an-chat-history-row:hover .chat-sidebar-thread-title__content {
+    animation: none;
+  }
+}
+
+.chat-sidebar-history.an-chat-history--rail
+  .an-chat-history-row--active
+  .an-chat-history-row__button {
+  background: hsl(var(--sidebar-accent));
+  color: hsl(var(--sidebar-accent-foreground));
+}
+
+.dark {
+  --background: 0 0% 9.4%;
+  --foreground: 0 0% 90%;
+  --card: 0 0% 16.47%;
+  --card-foreground: 0 0% 90%;
+  --popover: 0 0% 15%;
+  --popover-foreground: 0 0% 90%;
+  --primary: 0 0% 75%;
+  --primary-foreground: 0 0% 10%;
+  --secondary: 0 0% 18%;
+  --secondary-foreground: 0 0% 90%;
+  --muted: 0 0% 16%;
+  --muted-foreground: 0 0% 60%;
+  --accent: 0 0% 18%;
+  --accent-foreground: 0 0% 90%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 24%;
+  --input: 0 0% 24%;
+  --ring: 0 0% 60%;
+  --radius: 0.5rem;
+  --sidebar-background: 0 0% 13.33%;
+  --sidebar-foreground: 0 0% 60%;
+  --sidebar-primary: 0 0% 75%;
+  --sidebar-primary-foreground: 0 0% 10%;
+  --sidebar-accent: 0 0% 16%;
+  --sidebar-accent-foreground: 0 0% 90%;
+  --sidebar-border: 0 0% 20%;
+  --sidebar-ring: 0 0% 60%;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Inter Variable", "Inter", sans-serif;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.tourvia-page {
+  --tourvia-blue: #1a77ed;
+  --tourvia-ink: #070707;
+  --tourvia-soft-blue: #e8f1fd;
+  --tourvia-gray: #555;
+  min-height: 100%;
+  overflow: hidden;
+  background: #fff;
+  color: var(--tourvia-ink);
+  font-family: "Inter Variable", "Inter", sans-serif;
+}
+
+.tourvia-container {
+  width: min(100% - 80px, 1440px);
+  margin-inline: auto;
+}
+
+.tourvia-navbar {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 50%;
+  display: flex;
+  width: min(100% - 80px, 1440px);
+  align-items: center;
+  justify-content: space-between;
+  transform: translateX(-50%);
+  padding-top: 20px;
+  color: #fff;
+}
+
+.tourvia-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: -0.08em;
+  text-decoration: none;
+}
+
+.tourvia-logo-mark {
+  display: grid;
+  width: 27px;
+  height: 27px;
+  place-items: center;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.12em;
+}
+
+.tourvia-nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 100px;
+  background: rgba(7, 7, 7, 0.12);
+  backdrop-filter: blur(12px);
+}
+
+.tourvia-nav-menu a,
+.tourvia-book-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 16px;
+  border-radius: 100px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 200ms ease, background-color 200ms ease;
+}
+
+.tourvia-nav-menu a:hover,
+.tourvia-nav-menu a:focus-visible {
+  outline: none;
+  background: #fff;
+  color: var(--tourvia-ink);
+}
+
+.tourvia-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tourvia-book-button {
+  padding: 6px 6px 6px 17px;
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  background: rgba(7, 7, 7, 0.12);
+  backdrop-filter: blur(12px);
+}
+
+.tourvia-book-button:hover { background: rgba(255, 255, 255, 0.16); }
+
+.tourvia-book-icon,
+.tourvia-arrow-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--tourvia-ink);
+}
+
+.tourvia-menu-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  border-radius: 50%;
+  background: rgba(7, 7, 7, 0.12);
+  color: #fff;
+}
+
+.tourvia-hero {
+  position: relative;
+  display: flex;
+  min-height: 780px;
+  height: 100vh;
+  overflow: hidden;
+  align-items: flex-end;
+  color: #fff;
+  background: #172a3f;
+}
+
+.tourvia-hero-image,
+.tourvia-hero-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tourvia-hero-image { object-position: center 42%; }
+.tourvia-hero-overlay { background: linear-gradient(180deg, rgba(2, 13, 22, 0.42) 0%, rgba(2, 13, 22, 0.04) 38%, rgba(2, 8, 14, 0.9) 100%); }
+
+.tourvia-hero-wordmark {
+  position: absolute;
+  top: 17%;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(4.4rem, 17.5vw, 16rem);
+  font-weight: 650;
+  letter-spacing: 0.015em;
+  line-height: 0.9;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.tourvia-hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 36px;
+  padding-bottom: 62px;
+}
+
+.tourvia-hero-intro { max-width: 730px; }
+.tourvia-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 15px;
+  border: 1px solid rgba(7, 7, 7, 0.28);
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.tourvia-label--dark { border-color: rgba(255, 255, 255, 0.35); color: #fff; }
+.tourvia-label-line { width: 18px; height: 1px; background: currentColor; }
+.tourvia-hero h1,
+.tourvia-section h2,
+.tourvia-footer h2 {
+  margin: 23px 0 0;
+  font-weight: 520;
+  letter-spacing: -0.055em;
+  line-height: 1.04;
+}
+
+.tourvia-hero h1 { max-width: 680px; font-size: clamp(2.8rem, 6vw, 5.3rem); }
+.tourvia-hero h1 span { display: block; }
+
+.tourvia-arrow-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  min-width: 202px;
+  margin-top: 38px;
+  padding: 6px 6px 6px 20px;
+  border: 1px solid rgba(7, 7, 7, 0.25);
+  border-radius: 100px;
+  background: #fff;
+  color: var(--tourvia-ink);
+  font-size: 14px;
+  font-weight: 550;
+  text-decoration: none;
+  transition: transform 200ms ease, background-color 200ms ease;
+}
+
+.tourvia-arrow-button:hover { transform: translateY(-2px); }
+.tourvia-arrow-button--blue { background: var(--tourvia-blue); border-color: var(--tourvia-blue); color: #fff; }
+.tourvia-arrow-button--blue .tourvia-arrow-icon { color: var(--tourvia-blue); }
+.tourvia-arrow-icon { width: 42px; height: 42px; }
+
+.tourvia-video-card {
+  width: min(100%, 330px);
+  padding: 9px 9px 4px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--tourvia-ink);
+  backdrop-filter: blur(10px);
+}
+
+.tourvia-video-frame { position: relative; height: 190px; overflow: hidden; border-radius: 11px; }
+.tourvia-video-frame img { width: 100%; height: 100%; object-fit: cover; }
+.tourvia-play-button,
+.tourvia-cta-play {
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--tourvia-ink);
+  cursor: pointer;
+}
+.tourvia-play-button { position: absolute; top: 50%; left: 50%; width: 50px; height: 50px; transform: translate(-50%, -50%); }
+.tourvia-video-card > span { display: block; padding: 11px 4px 5px; font-size: 14px; }
+.tourvia-video-card i { display: inline-block; width: 5px; height: 5px; margin: 0 8px 2px 1px; border-radius: 50%; background: var(--tourvia-blue); }
+
+.tourvia-section { padding: 135px 0 0; }
+.tourvia-about-heading { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.tourvia-about-heading h2 { max-width: 960px; font-size: clamp(2.5rem, 4.8vw, 4.4rem); }
+.tourvia-about-heading .tourvia-arrow-button { margin-top: 36px; }
+.tourvia-about-grid { display: grid; grid-template-columns: 1fr 1.02fr 1fr; gap: 24px; margin-top: 84px; }
+.tourvia-stat-card { display: flex; flex-direction: column; min-height: 380px; padding: 24px 24px 32px; border-radius: 16px; background: var(--tourvia-soft-blue); }
+.tourvia-stat-card--reverse .tourvia-stat-image { order: -1; }
+.tourvia-stat-image { height: 188px; overflow: hidden; border-radius: 9px; }
+.tourvia-stat-image img { width: 100%; height: 100%; object-fit: cover; }
+.tourvia-stat-number { margin-top: auto; font-size: clamp(3rem, 4.5vw, 4.2rem); font-weight: 520; letter-spacing: -0.06em; line-height: 1; }
+.tourvia-stat-number span { color: var(--tourvia-blue); }
+.tourvia-stat-label { margin-top: 9px; color: var(--tourvia-gray); font-size: 15px; }
+.tourvia-about-feature { min-height: 380px; overflow: hidden; border-radius: 16px; }
+.tourvia-about-feature img { width: 100%; height: 100%; object-fit: cover; }
+
+.tourvia-section-heading-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+.tourvia-section-heading-row h2 { max-width: 625px; font-size: clamp(2.8rem, 4.7vw, 4.4rem); }
+.tourvia-section-heading-row .tourvia-arrow-button { margin-bottom: 4px; }
+.tourvia-destination-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 54px; }
+.tourvia-destination-card { position: relative; height: 460px; overflow: hidden; border-radius: 16px; color: #fff; }
+.tourvia-destination-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms ease; }
+.tourvia-destination-card:hover img { transform: scale(1.04); }
+.tourvia-destination-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, 0.45), transparent 32%, rgba(0, 0, 0, 0.82)); }
+.tourvia-country-pill { position: absolute; top: 20px; left: 20px; padding: 8px 15px; border: 1px solid rgba(255, 255, 255, 0.36); border-radius: 100px; background: rgba(255, 255, 255, 0.12); font-size: 14px; backdrop-filter: blur(12px); }
+.tourvia-destination-copy { position: absolute; right: 20px; bottom: 22px; left: 20px; }
+.tourvia-destination-copy h3 { margin: 0; font-size: 25px; font-weight: 520; letter-spacing: -0.04em; }
+.tourvia-destination-copy span { display: block; margin-top: 7px; color: rgba(255, 255, 255, 0.76); font-size: 14px; }
+
+.tourvia-why-section { padding-top: 135px; }
+.tourvia-why-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.02fr); overflow: hidden; border-radius: 16px; }
+.tourvia-why-image { position: relative; min-height: 720px; }
+.tourvia-why-image > img { width: 100%; height: 100%; object-fit: cover; }
+.tourvia-review-float { position: absolute; right: 30px; bottom: 30px; left: 30px; padding: 20px; border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 10px; background: rgba(7, 7, 7, 0.22); color: #fff; backdrop-filter: blur(16px); }
+.tourvia-stars { display: flex; gap: 4px; color: var(--tourvia-blue); }
+.tourvia-review-float p { max-width: 340px; margin: 20px 0 19px; font-size: 17px; line-height: 1.35; }
+.tourvia-review-float span { font-size: 13px; }
+.tourvia-review-float b { color: rgba(255, 255, 255, 0.65); font-weight: 400; }
+.tourvia-why-copy { padding: 58px clamp(28px, 5vw, 76px); background: var(--tourvia-soft-blue); }
+.tourvia-why-copy h2 { font-size: clamp(2.5rem, 4.1vw, 4rem); }
+.tourvia-benefits { margin-top: 52px; }
+.tourvia-benefits article { display: grid; grid-template-columns: 64px 1fr; gap: 20px; padding: 20px 0; border-bottom: 1px solid rgba(7, 7, 7, 0.13); }
+.tourvia-benefits article:first-child { padding-top: 0; }
+.tourvia-benefit-icon { display: grid; width: 64px; height: 64px; place-items: center; border-radius: 50%; background: var(--tourvia-blue); color: #fff; }
+.tourvia-benefits h3 { margin: 3px 0 8px; font-size: 21px; font-weight: 550; letter-spacing: -0.04em; }
+.tourvia-benefits p { max-width: 390px; margin: 0; color: var(--tourvia-gray); font-size: 14px; line-height: 1.5; }
+
+.tourvia-package-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 54px; }
+.tourvia-package-card { padding: 24px; border: 1px solid rgba(26, 119, 237, 0.2); border-radius: 16px; }
+.tourvia-package-image { height: 340px; overflow: hidden; border-radius: 9px; }
+.tourvia-package-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms ease; }
+.tourvia-package-card:hover .tourvia-package-image img { transform: scale(1.04); }
+.tourvia-package-meta { display: flex; justify-content: space-between; gap: 12px; margin-top: 19px; color: var(--tourvia-gray); font-size: 13px; }
+.tourvia-package-card h3 { margin: 17px 0 20px; font-size: 29px; font-weight: 520; letter-spacing: -0.05em; }
+.tourvia-detail-link { display: flex; align-items: center; justify-content: center; gap: 9px; padding: 13px 20px; border-radius: 100px; background: rgba(26, 119, 237, 0.1); color: var(--tourvia-blue); font-size: 14px; font-weight: 550; text-decoration: none; transition: background-color 200ms ease; }
+.tourvia-detail-link:hover { background: rgba(26, 119, 237, 0.18); }
+
+.tourvia-testimonials-section { padding-bottom: 135px; }
+.tourvia-testimonials-heading { align-items: flex-end; }
+.tourvia-slider-controls { display: flex; gap: 8px; }
+.tourvia-slider-controls button { display: grid; width: 48px; height: 48px; place-items: center; border: 1px solid rgba(7, 7, 7, 0.16); border-radius: 50%; background: #fff; color: var(--tourvia-ink); cursor: pointer; transition: background-color 200ms ease, color 200ms ease; }
+.tourvia-slider-controls button:hover { background: var(--tourvia-blue); color: #fff; }
+.tourvia-testimonial-card { display: grid; grid-template-columns: 42% 1fr; gap: 44px; margin-top: 48px; padding: 24px; border-radius: 16px; background: var(--tourvia-soft-blue); }
+.tourvia-testimonial-card > img { width: 100%; height: 453px; border-radius: 9px; object-fit: cover; }
+.tourvia-testimonial-copy { display: flex; flex-direction: column; justify-content: center; padding-right: 32px; }
+.tourvia-testimonial-copy blockquote { max-width: 610px; margin: 25px 0 38px; font-size: clamp(1.5rem, 2.5vw, 2.25rem); letter-spacing: -0.04em; line-height: 1.19; }
+.tourvia-testimonial-author { display: flex; flex-direction: column; gap: 4px; }
+.tourvia-testimonial-author strong { font-size: 16px; font-weight: 550; }
+.tourvia-testimonial-author span { color: var(--tourvia-gray); font-size: 14px; }
+
+.tourvia-activities-section { padding-top: 0; }
+.tourvia-activities-heading { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 135px 0 64px; }
+.tourvia-activities-heading h2 { max-width: 625px; font-size: clamp(2.8rem, 4.7vw, 4.4rem); }
+.tourvia-activities-grid { position: relative; min-height: 650px; overflow: hidden; border-radius: 16px; }
+.tourvia-activities-grid > img, .tourvia-activity-shade { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tourvia-activity-shade { background: linear-gradient(0deg, rgba(0, 0, 0, 0.82), rgba(12, 12, 12, 0.08) 65%); }
+.tourvia-activity-cards { position: absolute; right: 7%; bottom: 7%; left: 7%; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; align-items: end; }
+.tourvia-activity-cards article { min-height: 230px; padding: 22px; border-radius: 14px; background: #fff; }
+.tourvia-activity-cards article:nth-child(2), .tourvia-activity-cards article:nth-child(4) { transform: translateY(-32px); }
+.tourvia-activity-cards article > span { display: grid; width: 58px; height: 58px; place-items: center; border-radius: 50%; background: var(--tourvia-blue); color: #fff; }
+.tourvia-activity-cards h3 { margin: 20px 0 9px; font-size: 20px; font-weight: 550; letter-spacing: -0.04em; }
+.tourvia-activity-cards p { margin: 0; color: var(--tourvia-gray); font-size: 13px; line-height: 1.5; }
+
+.tourvia-cta-section { position: relative; display: grid; min-height: 720px; height: 88vh; margin-top: 135px; overflow: hidden; place-items: center; color: #fff; }
+.tourvia-cta-section > img, .tourvia-cta-overlay { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tourvia-cta-section > img { object-position: center 55%; }
+.tourvia-cta-overlay { background: linear-gradient(0deg, rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.12) 65%); }
+.tourvia-cta-play { position: relative; z-index: 1; width: 72px; height: 72px; }
+.tourvia-marquee { position: absolute; right: 0; bottom: 17px; left: 0; display: flex; overflow: hidden; color: rgba(255, 255, 255, 0.62); font-size: clamp(4.2rem, 12vw, 12rem); font-weight: 650; letter-spacing: -0.04em; line-height: 0.9; text-decoration: none; white-space: nowrap; }
+.tourvia-marquee span { display: block; flex: none; animation: tourvia-marquee 24s linear infinite; }
+@keyframes tourvia-marquee { to { transform: translateX(-100%); } }
+
+.tourvia-blog-section { padding-bottom: 135px; }
+.tourvia-blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 54px; }
+.tourvia-blog-image { height: 430px; overflow: hidden; border-radius: 16px; }
+.tourvia-blog-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms ease; }
+.tourvia-blog-grid article:hover img { transform: scale(1.04); }
+.tourvia-blog-grid article > span { display: inline-block; margin-top: 18px; padding: 6px 12px; border-radius: 100px; background: rgba(26, 119, 237, 0.1); color: var(--tourvia-blue); font-size: 12px; }
+.tourvia-blog-grid h3 { max-width: 360px; margin: 14px 0 0; font-size: 23px; font-weight: 520; letter-spacing: -0.045em; line-height: 1.12; }
+
+.tourvia-footer { position: relative; min-height: 720px; overflow: hidden; color: #fff; background: #07111e; }
+.tourvia-footer::before { position: absolute; inset: 0; background: url("https://images.pexels.com/photos/8002076/pexels-photo-8002076.jpeg") center 75% / cover; content: ""; opacity: 0.52; }
+.tourvia-footer-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, #fff 0%, rgba(0, 37, 84, 0.35) 20%, rgba(7, 7, 7, 0.97) 79%); }
+.tourvia-footer-content { position: relative; z-index: 1; display: flex; min-height: 720px; flex-direction: column; justify-content: space-between; padding: 150px 0 8px; }
+.tourvia-footer-grid { display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: 36px; align-items: center; }
+.tourvia-footer-links { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.tourvia-footer-links h3 { margin: 0 0 12px; color: #acd1fa; font-size: 18px; font-weight: 500; text-transform: capitalize; }
+.tourvia-footer-links a { color: #fff; font-size: 15px; text-decoration: none; transition: color 200ms ease; }
+.tourvia-footer-links a:hover { color: #acd1fa; }
+.tourvia-footer-center { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.tourvia-footer h2 { max-width: 560px; margin-top: 0; font-size: clamp(2.6rem, 4vw, 4rem); }
+.tourvia-footer-center .tourvia-arrow-button { margin-top: 32px; }
+.tourvia-footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 20px; color: rgba(255, 255, 255, 0.8); font-size: 13px; }
+.tourvia-footer-bottom div { display: flex; gap: 22px; }
+.tourvia-footer-bottom a { color: inherit; text-decoration: none; }
+.tourvia-footer-wordmark { margin-top: 16px; color: #fff; font-size: clamp(5rem, 19vw, 18rem); font-weight: 650; letter-spacing: -0.09em; line-height: 0.7; text-align: center; }
+
+@media (max-width: 900px) {
+  .tourvia-container, .tourvia-navbar { width: min(100% - 40px, 1440px); }
+  .tourvia-nav-menu { position: absolute; top: 74px; right: 0; left: 0; display: none; flex-direction: column; align-items: stretch; border-radius: 18px; background: rgba(7, 7, 7, 0.9); }
+  .tourvia-nav-menu--open { display: flex; }
+  .tourvia-nav-menu a { justify-content: space-between; padding: 14px 16px; }
+  .tourvia-menu-toggle { display: grid; }
+  .tourvia-book-button { display: none; }
+  .tourvia-hero { min-height: 750px; }
+  .tourvia-hero-content { gap: 20px; }
+  .tourvia-video-card { width: 260px; }
+  .tourvia-video-frame { height: 155px; }
+  .tourvia-about-grid, .tourvia-destination-grid, .tourvia-blog-grid { grid-template-columns: repeat(2, 1fr); }
+  .tourvia-about-feature { grid-column: span 2; grid-row: 1; height: 340px; }
+  .tourvia-why-grid { grid-template-columns: 1fr; }
+  .tourvia-why-image { min-height: 560px; }
+  .tourvia-why-copy { padding: 58px 40px; }
+  .tourvia-activity-cards { grid-template-columns: repeat(2, 1fr); }
+  .tourvia-activity-cards article:nth-child(2), .tourvia-activity-cards article:nth-child(4) { transform: none; }
+  .tourvia-activities-grid { min-height: 850px; }
+  .tourvia-footer-grid { grid-template-columns: 1fr 1fr; }
+  .tourvia-footer-center { grid-column: span 2; grid-row: 1; }
+}
+
+@media (max-width: 620px) {
+  .tourvia-container, .tourvia-navbar { width: calc(100% - 32px); }
+  .tourvia-navbar { padding-top: 15px; }
+  .tourvia-logo { font-size: 22px; }
+  .tourvia-hero { min-height: 760px; }
+  .tourvia-hero-wordmark { top: 18%; font-size: 20vw; }
+  .tourvia-hero-content { display: block; padding-bottom: 24px; }
+  .tourvia-hero h1 { font-size: 3.4rem; }
+  .tourvia-hero-intro .tourvia-arrow-button { margin-top: 25px; }
+  .tourvia-video-card { width: 100%; margin-top: 42px; }
+  .tourvia-video-frame { height: 160px; }
+  .tourvia-section { padding-top: 88px; }
+  .tourvia-about-heading h2, .tourvia-section-heading-row h2, .tourvia-activities-heading h2 { font-size: 2.8rem; }
+  .tourvia-about-grid, .tourvia-destination-grid, .tourvia-package-grid, .tourvia-blog-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 50px; }
+  .tourvia-about-feature { grid-column: auto; grid-row: auto; height: 340px; }
+  .tourvia-stat-card { min-height: 350px; }
+  .tourvia-section-heading-row { display: block; }
+  .tourvia-section-heading-row .tourvia-arrow-button { margin-top: 25px; }
+  .tourvia-destination-card { height: 400px; }
+  .tourvia-why-section { padding-top: 88px; }
+  .tourvia-why-image { min-height: 500px; }
+  .tourvia-review-float { right: 16px; bottom: 16px; left: 16px; }
+  .tourvia-why-copy { padding: 44px 24px; }
+  .tourvia-benefits { margin-top: 40px; }
+  .tourvia-package-card { padding: 16px; }
+  .tourvia-package-image { height: 290px; }
+  .tourvia-package-meta { flex-wrap: wrap; }
+  .tourvia-testimonials-section { padding-bottom: 88px; }
+  .tourvia-testimonial-card { display: block; margin-top: 34px; padding: 16px; }
+  .tourvia-testimonial-card > img { height: 330px; }
+  .tourvia-testimonial-copy { padding: 28px 0 10px; }
+  .tourvia-testimonial-copy blockquote { margin: 20px 0 28px; font-size: 1.55rem; }
+  .tourvia-activities-heading { padding: 88px 0 42px; }
+  .tourvia-activities-grid { min-height: 1030px; }
+  .tourvia-activity-cards { right: 16px; bottom: 16px; left: 16px; grid-template-columns: 1fr; gap: 12px; }
+  .tourvia-activity-cards article { min-height: 0; padding: 18px; }
+  .tourvia-activity-cards article:nth-child(n + 3) { display: none; }
+  .tourvia-cta-section { min-height: 570px; height: 75vh; margin-top: 88px; }
+  .tourvia-marquee { bottom: 26px; font-size: 4.8rem; }
+  .tourvia-blog-section { padding-bottom: 88px; }
+  .tourvia-blog-image { height: 360px; }
+  .tourvia-footer, .tourvia-footer-content { min-height: 790px; }
+  .tourvia-footer-content { padding: 100px 0 8px; }
+  .tourvia-footer-grid { grid-template-columns: 1fr 1fr; gap: 26px 18px; }
+  .tourvia-footer-center { grid-column: span 2; }
+  .tourvia-footer-center h2 { font-size: 2.6rem; }
+  .tourvia-footer-bottom { display: block; }
+  .tourvia-footer-bottom div { margin-top: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tourvia-marquee span { animation: none; }
+  .tourvia-destination-card img, .tourvia-package-image img, .tourvia-blog-image img { transition: none; }
+}
+
+/* Tripora's menu-first header treatment */
+.tourvia-navbar {
+  inset: 0 0 auto;
+  width: 100%;
+  max-width: none;
+  padding: 30px 30px 0;
+  transform: none;
+}
+
+.tourvia-navbar-grid {
+  display: grid;
+  width: min(100%, 1880px);
+  margin-inline: auto;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  column-gap: 30px;
+}
+
+.tourvia-navbar-left { display: flex; align-items: center; }
+.tourvia-navbar .tourvia-logo {
+  justify-self: center;
+  color: #fff;
+  font-size: 25px;
+}
+
+.tourvia-menu-trigger {
+  position: relative;
+  z-index: 10002;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.tourvia-menu-round {
+  display: grid;
+  width: 50px;
+  height: 50px;
+  place-items: center;
+  flex: none;
+  border-radius: 50%;
+  background: #fff;
+  color: #1a1a17;
+}
+
+.tourvia-menu-label {
+  position: relative;
+  min-width: 47px;
+  height: 22px;
+  overflow: hidden;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.tourvia-menu-label span {
+  position: absolute;
+  inset: 0;
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+
+.tourvia-menu-label span:last-child { opacity: 0; transform: translateY(8px); }
+.tourvia-navbar--open .tourvia-menu-label span:first-child { opacity: 0; transform: translateY(-8px); }
+.tourvia-navbar--open .tourvia-menu-label span:last-child { opacity: 1; transform: translateY(0); }
+
+.tourvia-nav-actions { justify-content: flex-end; }
+.tourvia-plan-button {
+  display: inline-flex;
+  min-width: 178px;
+  height: 50px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  padding: 5px 5px 5px 30px;
+  border-radius: 100px;
+  background: #fff;
+  color: #1a1a17;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: transform 200ms ease, background-color 200ms ease;
+}
+
+.tourvia-plan-button:hover { transform: translateY(-2px); background: #fedbe5; }
+.tourvia-plan-icon {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border-radius: 50%;
+  background: #fedbe5;
+  color: #1a1a17;
+}
+
+.tourvia-menu-panel {
+  position: fixed;
+  z-index: 10000;
+  inset: 0;
+  display: grid;
+  min-height: 100vh;
+  padding: 150px 30px 40px;
+  visibility: hidden;
+  background: rgba(10, 10, 10, 0.82);
+  opacity: 0;
+  backdrop-filter: blur(25px);
+  pointer-events: none;
+  transition: opacity 260ms ease, visibility 260ms ease;
+}
+
+.tourvia-navbar--open .tourvia-menu-panel { visibility: visible; opacity: 1; pointer-events: auto; }
+.tourvia-menu-panel-inner { width: min(100%, 1460px); margin: auto; }
+.tourvia-menu-links { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; padding-bottom: 42px; border-bottom: 1px solid rgba(255, 255, 255, 0.25); }
+.tourvia-menu-links > div { display: flex; flex-direction: column; gap: 18px; }
+.tourvia-menu-links a { width: fit-content; color: #fff; font-size: clamp(2rem, 4vw, 4.8rem); font-weight: 500; letter-spacing: -0.055em; line-height: 0.98; text-decoration: none; transition: color 200ms ease, transform 200ms ease; }
+.tourvia-menu-links a:hover { color: #fedbe5; transform: translateX(8px); }
+.tourvia-menu-footer { display: flex; align-items: center; gap: 28px; padding-top: 25px; color: rgba(255, 255, 255, 0.72); font-size: 14px; }
+.tourvia-menu-footer a { color: inherit; text-decoration: none; }
+.tourvia-menu-socials { display: flex; gap: 18px; margin-left: auto; }
+.tourvia-menu-socials a { color: #fff; }
+
+@media (max-width: 900px) {
+  .tourvia-navbar { padding: 20px 20px 0; }
+  .tourvia-navbar-grid { column-gap: 12px; }
+  .tourvia-menu-label { display: none; }
+  .tourvia-menu-round { width: 44px; height: 44px; }
+  .tourvia-plan-button { min-width: 146px; height: 44px; padding: 4px 4px 4px 17px; font-size: 14px; }
+  .tourvia-plan-icon { width: 36px; height: 36px; }
+  .tourvia-menu-panel { padding: 110px 20px 30px; }
+}
+
+@media (max-width: 520px) {
+  .tourvia-plan-button { min-width: 44px; width: 44px; padding: 4px; justify-content: center; }
+  .tourvia-plan-button > span:first-child { display: none; }
+  .tourvia-plan-icon { width: 36px; height: 36px; }
+  .tourvia-menu-links { grid-template-columns: 1fr; gap: 28px; }
+  .tourvia-menu-links a { font-size: 2.65rem; }
+  .tourvia-menu-footer { flex-wrap: wrap; gap: 12px 20px; }
+  .tourvia-menu-socials { width: 100%; margin-left: 0; }
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.22);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.34);
+}
